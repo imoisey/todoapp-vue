@@ -15,7 +15,7 @@ RUN apk add bash coreutils shadow
 
 RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 
-COPY ./php/conf.d /usr/local/etc/php/conf.d
+COPY ./development/php/conf.d /usr/local/etc/php/conf.d
 
 RUN apk add unzip
 

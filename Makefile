@@ -4,7 +4,6 @@ down: docker-down
 restart: docker-down docker-up
 shell: docker-shell
 
-
 symfony-init:
 	@docker-compose run --rm -u $$(id -u) php-cli symfony new --no-git .
 

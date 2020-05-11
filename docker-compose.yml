@@ -18,6 +18,14 @@ services:
     volumes:
       - "./frontend:/app"
 
+  frontend-node-cli:
+    build:
+      context: frontend/docker
+      dockerfile: development/node/Dockerfile
+    volumes:
+      - "./frontend:/app"
+    tty: true
+
   api:
     build:
       context: api/docker

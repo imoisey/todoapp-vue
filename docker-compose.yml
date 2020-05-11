@@ -41,9 +41,8 @@ services:
       args:
         - GIT_USER_NAME=${GIT_USER_NAME}
         - GIT_USER_EMAIL=${GIT_USER_EMAIL}
-        - USER_ID=${USER_ID}
-        - GROUP_ID=${GROUP_ID}
     volumes:
       - "./api:/app"
     depends_on:
       - api-php-fpm
+    tty: true

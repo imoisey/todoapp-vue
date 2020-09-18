@@ -12,7 +12,7 @@
 Сборка приложения:
 
 ```bash
-make init
+cp .env.dist .env && make init
 ```
 
 Запуск приложения:

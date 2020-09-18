@@ -1,9 +1,7 @@
 version: '3.7'
 services:
   gateway:
-    build:
-      context: gateway/docker
-      dockerfile: development/nginx/Dockerfile
+    image: ${REGISTRY}/todoapp-gateway:${IMAGE_TAG}
     ports:
       - "${FRONTEND_PORT}:8080"
       - "${API_PORT}:8081"
@@ -12,43 +10,30 @@ services:
       - api
 
   frontend:
-    build:
-      context: frontend/docker
-      dockerfile: development/nginx/Dockerfile
+    image: ${REGISTRY}/todoapp-frontend:${IMAGE_TAG}
     volumes:
       - "./frontend:/app"
 
   frontend-node-cli:
-    build:
-      context: frontend/docker
-      dockerfile: development/node/Dockerfile
+    image: ${REGISTRY}/todoapp-frontend-node-cli:${IMAGE_TAG}
     volumes:
       - "./frontend:/app"
     tty: true
 
   api:
-    build:
-      context: api/docker
-      dockerfile: development/nginx/Dockerfile
+    image: ${REGISTRY}/todoapp-api:${IMAGE_TAG}
     volumes:
       - ./api:/app
     depends_on:
       - api-php-fpm
 
   api-php-fpm:
-    build:
-      context: api/docker
-      dockerfile: development/php-fpm/Dockerfile
+    image: ${REGISTRY}/todoapp-php-fpm:${IMAGE_TAG}
     volumes:
       - "./api:/app"
 
   api-php-cli:
-    build:
-      context: api/docker
-      dockerfile: development/php-cli/Dockerfile
-      args:
-        - GIT_USER_NAME=${GIT_USER_NAME}
-        - GIT_USER_EMAIL=${GIT_USER_EMAIL}
+    image: ${REGISTRY}/todoapp-php-cli:${IMAGE_TAG}
     volumes:
       - "./api:/app"
     depends_on:

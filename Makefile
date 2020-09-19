@@ -19,7 +19,7 @@ docker-build: docker-build-gateway \
 
 docker-build-gateway:
 	@docker build -t ${REGISTRY}/todoapp-gateway:${IMAGE_TAG} \
-		-f api/docker/${ENV}/nginx/Dockerfile api/docker
+		-f gateway/docker/${ENV}/nginx/Dockerfile gateway/docker
 
 docker-build-frontend:
 	@docker build -t ${REGISTRY}/todoapp-frontend:${IMAGE_TAG} \

@@ -28,12 +28,12 @@ services:
       - api-php-fpm
 
   api-php-fpm:
-    image: ${REGISTRY}/todoapp-php-fpm:${IMAGE_TAG}
+    image: ${REGISTRY}/todoapp-api-php-fpm:${IMAGE_TAG}
     volumes:
       - "./api:/app"
 
   api-php-cli:
-    image: ${REGISTRY}/todoapp-php-cli:${IMAGE_TAG}
+    image: ${REGISTRY}/todoapp-api-php-cli:${IMAGE_TAG}
     volumes:
       - "./api:/app"
     depends_on:

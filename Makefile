@@ -8,7 +8,7 @@ init: docker-clear-down docker-build docker-up
 up: docker-up
 down: docker-down
 restart: docker-down docker-up
-build: docker-build frontend-build
+build: docker-build frontend-install frontend-build
 
 docker-build: docker-build-gateway \
  	docker-build-frontend \
@@ -49,6 +49,10 @@ docker-down:
 
 docker-clear-down:
 	@docker-compose $(DOCKER_ARGS) down -v --remove-orphans
+
+frontend-install:
+	@docker-compose $(DOCKER_ARGS) exec $(FRONTEND_NODE_CLI) yarn install
+	@$(MAKE) -s chown
 
 frontend-build:
 	@docker-compose $(DOCKER_ARGS) exec $(FRONTEND_NODE_CLI) yarn run build

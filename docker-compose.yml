@@ -29,11 +29,15 @@ services:
 
   api-php-fpm:
     image: ${REGISTRY}/todoapp-api-php-fpm:${IMAGE_TAG}
+    environment:
+      APP_ENV: ${ENV}
     volumes:
       - "./api:/app"
 
   api-php-cli:
     image: ${REGISTRY}/todoapp-api-php-cli:${IMAGE_TAG}
+    environment:
+      APP_ENV: ${ENV}
     volumes:
       - "./api:/app"
     depends_on:

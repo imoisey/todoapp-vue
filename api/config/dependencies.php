@@ -14,4 +14,4 @@ $configs = array_map(
     $files
 );
 
-return array_merge_recursive(...$configs);
+return array_replace_recursive(...$configs);

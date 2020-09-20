@@ -14,6 +14,8 @@ $container = require __DIR__ . '/../config/container.php';
 
 $app = AppFactory::createFromContainer($container);
 
+(require __DIR__ . '/../config/middleware.php')($app, $container);
+
 $app->get('/', function (Request $request, Response $response, $args) {
     $response->getBody()->write('{"message": "Hello, TodoApp!"}');
     return $response->withHeader('Content-type', 'application/json');

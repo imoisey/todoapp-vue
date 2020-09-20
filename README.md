@@ -1,6 +1,6 @@
 # TodoApp
 
-Приложение для списка задач на Vue + Symfony 5
+Приложение для списка задач на Vue + Slim 4
 
 ## Installation
 

@@ -1,0 +1,23 @@
+{
+    "name": "imoisey/todoapp",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Igor Moiseev",
+            "email": "developer.modx@gmail.com"
+        }
+    ],
+    "config": {
+      "process-timeout": 0,
+      "sort-packages": true
+    },
+    "require": {
+        "php": "^7.4",
+        "slim/psr7": "^1.2",
+        "slim/slim": "^4.5"
+    },
+    "require-dev": {
+      "roave/security-advisories": "dev-master"
+    }
+}

@@ -4,11 +4,11 @@ DOCKER_ARGS=--log-level ERROR
 API_PHP_CLI=api-php-cli
 FRONTEND_NODE_CLI=frontend-node-cli
 
-init: docker-clear-down docker-build docker-up
+init: docker-clear-down docker-build docker-up frontend-init api-init
 up: docker-up
 down: docker-down
 restart: docker-down docker-up
-build: docker-build frontend-install frontend-build
+build: docker-build
 
 docker-build: docker-build-gateway \
  	docker-build-frontend \
@@ -50,17 +50,24 @@ docker-down:
 docker-clear-down:
 	@docker-compose $(DOCKER_ARGS) down -v --remove-orphans
 
-frontend-install:
+frontend-init: frontend-yarn-install frontend-yarn-build
+
+frontend-yarn-install:
 	@docker-compose $(DOCKER_ARGS) exec $(FRONTEND_NODE_CLI) yarn install
 	@$(MAKE) -s chown
 
-frontend-build:
+frontend-yarn-build:
 	@docker-compose $(DOCKER_ARGS) exec $(FRONTEND_NODE_CLI) yarn run build
 	@$(MAKE) -s chown
 
 frontend-shell:
 	@docker-compose $(DOCKER_ARGS) exec $(FRONTEND_NODE_CLI) /bin/bash
 	@$(MAKE) -s chown
+
+api-init: api-composer-install
+
+api-composer-install:
+	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer install
 
 api-shell:
 	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) /bin/bash

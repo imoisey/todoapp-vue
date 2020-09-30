@@ -66,8 +66,13 @@ frontend-shell:
 
 api-init: api-composer-install
 
+api-lint:
+	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer lint
+	@$(MAKE) -s chown
+
 api-composer-install:
 	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer install
+	@$(MAKE) -s chown
 
 api-shell:
 	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) /bin/bash

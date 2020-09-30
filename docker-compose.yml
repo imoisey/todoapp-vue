@@ -31,6 +31,7 @@ services:
     image: ${REGISTRY}/todoapp-api-php-fpm:${IMAGE_TAG}
     environment:
       APP_ENV: ${ENV}
+      PHP_IDE_CONFIG: serverName=API
     volumes:
       - "./api:/app"
 

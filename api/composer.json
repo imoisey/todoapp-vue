@@ -32,11 +32,16 @@
             "App\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests/"
+        }
+    },
     "scripts": {
         "lint": "phplint --ansi",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "psalm": "psalm",
-        "phpunit": "phpunit"
+        "phpunit": "phpunit --colors=always"
     }
 }

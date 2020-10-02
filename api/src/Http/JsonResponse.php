@@ -8,6 +8,13 @@ use Slim\Psr7\Response;
 
 class JsonResponse extends Response
 {
+    /**
+     * JsonResponse constructor.
+     * @param mixed $data
+     * @param int $status
+     * @throws \JsonException
+     * @noinspection PhpUndefinedClassInspection
+     */
     public function __construct($data, int $status = 200)
     {
         parent::__construct(

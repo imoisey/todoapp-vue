@@ -68,6 +68,7 @@ api-init: api-composer-install
 
 api-lint:
 	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer lint
+	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer cs-check
 	@$(MAKE) -s chown
 
 api-composer-install:

@@ -71,6 +71,9 @@ api-lint:
 	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer cs-check
 	@$(MAKE) -s chown
 
+api-analyze:
+	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer psalm
+
 api-composer-install:
 	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer install
 	@$(MAKE) -s chown

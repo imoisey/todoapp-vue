@@ -4,7 +4,7 @@ namespace Test\Functional;
 
 class NotFoundTest extends WebTestCase
 {
-    public function testNotFound()
+    public function testNotFound(): void
     {
         $response = $this->app()->handle(self::json('GET', '/page-not-found'));
 

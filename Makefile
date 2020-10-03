@@ -9,6 +9,7 @@ up: docker-up
 down: docker-down
 restart: docker-down docker-up
 build: docker-build
+test: api-test
 
 docker-build: docker-build-gateway \
  	docker-build-frontend \
@@ -73,6 +74,9 @@ api-lint:
 
 api-analyze:
 	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer psalm
+
+api-test:
+	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer phpunit
 
 api-composer-install:
 	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer install

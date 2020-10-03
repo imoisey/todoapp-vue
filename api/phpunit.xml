@@ -4,7 +4,6 @@
          bootstrap="vendor/autoload.php"
          cacheResultFile="var/cache/.phpunit.test-results"
          executionOrder="depends,defects"
-         forceCoversAnnotation="true"
          beStrictAboutCoversAnnotation="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
@@ -12,17 +11,10 @@
          failOnWarning="true"
          verbose="true">
     <testsuites>
-        <testsuite name="default">
-            <directory suffix="Test.php">tests</directory>
+        <testsuite name="unit">
+            <directory suffix="Test.php">src/Http/Test/Unit</directory>
         </testsuite>
     </testsuites>
-
-    <coverage cacheDirectory="var/cache/.phpunit.code-coverage"
-              processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-    </coverage>
 
     <php>
         <env name="APP_ENV" value="test" force="true"/>

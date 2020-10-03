@@ -4,7 +4,7 @@ DOCKER_ARGS=--log-level ERROR
 API_PHP_CLI=api-php-cli
 FRONTEND_NODE_CLI=frontend-node-cli
 
-init: docker-clear-down docker-build docker-up frontend-init api-init
+init: docker-clear-down init-git-hooks docker-build docker-up frontend-init api-init
 up: docker-up
 down: docker-down
 restart: docker-down docker-up
@@ -12,6 +12,11 @@ build: docker-build
 lint: api-lint
 analyze: api-analyze
 test: api-test
+check: lint analyze test
+
+init-git-hooks:
+	@find .git/hooks -type l -exec rm {} \;
+	@find .githooks -type f -exec ln -sf ../../{} .git/hooks/ \;
 
 docker-build: docker-build-gateway \
  	docker-build-frontend \

@@ -9,6 +9,8 @@ up: docker-up
 down: docker-down
 restart: docker-down docker-up
 build: docker-build
+lint: api-lint
+analyze: api-analyze
 test: api-test
 
 docker-build: docker-build-gateway \
@@ -54,38 +56,40 @@ docker-clear-down:
 frontend-init: frontend-yarn-install frontend-yarn-build
 
 frontend-yarn-install:
-	@docker-compose $(DOCKER_ARGS) exec $(FRONTEND_NODE_CLI) yarn install
-	@$(MAKE) -s chown
+	@docker-compose $(DOCKER_ARGS) run --rm $(FRONTEND_NODE_CLI) yarn install
+	@$(MAKE) -s frontend-chown
 
 frontend-yarn-build:
-	@docker-compose $(DOCKER_ARGS) exec $(FRONTEND_NODE_CLI) yarn run build
-	@$(MAKE) -s chown
+	@docker-compose $(DOCKER_ARGS) run --rm $(FRONTEND_NODE_CLI) yarn run build
+	@$(MAKE) -s frontend-chown
 
 frontend-shell:
-	@docker-compose $(DOCKER_ARGS) exec $(FRONTEND_NODE_CLI) /bin/bash
-	@$(MAKE) -s chown
+	@docker-compose $(DOCKER_ARGS) run --rm $(FRONTEND_NODE_CLI) /bin/bash
+	@$(MAKE) -s frontend-chown
+
+frontend-chown:
+	@docker-compose $(DOCKER_ARGS) run --rm $(FRONTEND_NODE_CLI) chown -R 1000:1000 ./
 
 api-init: api-composer-install
 
+api-composer-install:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer install
+	@$(MAKE) -s api-chown
+
 api-lint:
-	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer lint
-	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer cs-check
-	@$(MAKE) -s chown
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer lint
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer cs-check
+	@$(MAKE) -s api-chown
 
 api-analyze:
-	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer psalm
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer psalm
 
 api-test:
-	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer phpunit
-
-api-composer-install:
-	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) composer install
-	@$(MAKE) -s chown
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer phpunit
 
 api-shell:
-	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) /bin/bash
-	@$(MAKE) -s chown
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) /bin/bash
+	@$(MAKE) -s api-chown
 
-chown:
-	@docker-compose $(DOCKER_ARGS) exec $(API_PHP_CLI) chown -R 1000:1000 ./
-	@docker-compose $(DOCKER_ARGS) exec $(FRONTEND_NODE_CLI) chown -R 1000:1000 ./
+api-chown:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) chown -R 1000:1000 ./

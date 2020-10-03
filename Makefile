@@ -84,8 +84,13 @@ api-lint:
 api-analyze:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer psalm
 
-api-test:
-	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer phpunit
+api-test: api-test-unit api-test-functional
+
+api-test-unit:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer phpunit -- --testsuite=unit
+
+api-test-functional:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer phpunit -- --testsuite=functional
 
 api-shell:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) /bin/bash

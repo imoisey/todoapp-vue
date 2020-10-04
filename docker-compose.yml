@@ -41,6 +41,4 @@ services:
       APP_ENV: ${ENV}
     volumes:
       - "./api:/app"
-    depends_on:
-      - api-php-fpm
     tty: true

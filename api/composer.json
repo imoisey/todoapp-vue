@@ -42,6 +42,7 @@
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "psalm": "psalm",
-        "phpunit": "phpunit --colors=always"
+        "phpunit": "phpunit --colors=always",
+        "phpunit-coverage": "phpunit --colors=always --coverage-html var/test/coverage"
     }
 }

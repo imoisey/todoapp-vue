@@ -94,6 +94,9 @@ api-test: api-test-unit api-test-functional
 api-test-unit:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer phpunit -- --testsuite=unit
 
+api-test-unit-coverage:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer phpunit-coverage -- --testsuite=unit
+
 api-test-functional:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer phpunit -- --testsuite=functional
 

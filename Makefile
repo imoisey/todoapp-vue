@@ -104,5 +104,8 @@ api-shell:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) /bin/bash
 	@$(MAKE) -s api-chown
 
+api-clear:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) sh -c 'rm -rf var/*/*'
+
 api-chown:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) chown -R 1000:1000 ./

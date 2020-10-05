@@ -100,6 +100,9 @@ api-test-unit-coverage:
 api-test-functional:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer phpunit -- --testsuite=functional
 
+api-test-functional-coverage:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer phpunit-coverage -- --testsuite=functional
+
 api-shell:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) /bin/bash
 	@$(MAKE) -s api-chown

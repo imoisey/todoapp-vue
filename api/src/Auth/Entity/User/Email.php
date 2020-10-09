@@ -17,7 +17,7 @@ class Email
         $this->value = mb_strtolower($value);
     }
 
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }

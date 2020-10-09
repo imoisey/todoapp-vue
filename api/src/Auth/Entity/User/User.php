@@ -12,7 +12,7 @@ class User
     private DateTimeImmutable $date;
     private Email $email;
     private string $passwordHash;
-    private ?Token $token;
+    private ?Token $joinConfirmToken;
 
     public function __construct(
         Id $id,
@@ -48,8 +48,8 @@ class User
         return $this->passwordHash;
     }
 
-    public function getToken(): ?Token
+    public function getJoinConfirmToken(): ?Token
     {
-        return $this->token;
+        return $this->joinConfirmToken;
     }
 }

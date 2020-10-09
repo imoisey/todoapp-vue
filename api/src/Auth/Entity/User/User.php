@@ -32,7 +32,7 @@ class User
     {
         return $this->id;
     }
-    
+
     public function getDate(): DateTimeImmutable
     {
         return $this->date;

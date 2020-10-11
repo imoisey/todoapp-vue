@@ -86,6 +86,10 @@ api-lint:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer cs-check
 	@$(MAKE) -s api-chown
 
+api-cs-fix:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer cs-fix
+	@$(MAKE) -s api-chown
+
 api-analyze:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer psalm
 

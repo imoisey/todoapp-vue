@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Test\Unit\Entity\User;
+namespace App\Auth\Test\Unit\Entity\User\User\JoinByEmail;
 
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
@@ -12,9 +12,9 @@ use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
-class UserTest extends TestCase
+class RequestTest extends TestCase
 {
-    public function testRequestSuccess(): void
+    public function testSuccess(): void
     {
         $user = new User(
             $id = Id::generate(),

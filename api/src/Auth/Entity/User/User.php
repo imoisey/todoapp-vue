@@ -19,6 +19,7 @@ class User
     private ?Token $passwordResetToken = null;
     private ?Email $newEmail = null;
     private ?Token $newEmailToken = null;
+    private Role $role;
 
     public function __construct(
         Id $id,
@@ -30,6 +31,7 @@ class User
         $this->date = $date;
         $this->email = $email;
         $this->status = $status;
+        $this->role = Role::user();
     }
 
     public static function joinByEmail(
@@ -124,6 +126,11 @@ class User
         $this->newEmailToken = null;
     }
 
+    public function changeRole(Role $role): void
+    {
+        $this->role = $role;
+    }
+
     public function isWait(): bool
     {
         return $this->status->isWait();
@@ -147,6 +154,11 @@ class User
     public function getEmail(): Email
     {
         return $this->email;
+    }
+
+    public function getRole(): Role
+    {
+        return $this->role;
     }
 
     public function getPasswordHash(): ?string

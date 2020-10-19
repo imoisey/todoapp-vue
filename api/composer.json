@@ -15,6 +15,7 @@
     "require": {
         "php": "^7.4",
         "ext-json": "^7.4",
+        "doctrine/orm": "^2.7",
         "php-di/php-di": "^6.2",
         "ramsey/uuid": "^4.1",
         "slim/psr7": "^1.2",

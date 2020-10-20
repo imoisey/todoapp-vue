@@ -32,6 +32,7 @@ services:
     environment:
       APP_ENV: ${ENV}
       PHP_IDE_CONFIG: serverName=API
+      DB_URL: pgsql://app:secret@api-postgres:5432/app
     volumes:
       - "./api:/app"
 
@@ -39,6 +40,7 @@ services:
     image: ${REGISTRY}/todoapp-api-php-cli:${IMAGE_TAG}
     environment:
       APP_ENV: ${ENV}
+      DB_URL: pgsql://app:secret@api-postgres:5432/app
     volumes:
       - "./api:/app"
     tty: true

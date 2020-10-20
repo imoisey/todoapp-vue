@@ -1,7 +1,1 @@
 vendor
-
-config/development
-config/development/*
-
-config/production
-config/production/*

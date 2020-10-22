@@ -35,13 +35,14 @@ return [
             false
         );
 
+        $config->setNamingStrategy(new UnderscoreNamingStrategy());
+
         foreach ($settings['types'] as $name => $class) {
             if (!Type::hasType($name)) {
+                /** @psalm-suppress ArgumentTypeCoercion */
                 Type::addType($name, $class);
             }
         }
-
-        $config->setNamingStrategy(new UnderscoreNamingStrategy());
 
         return EntityManager::create(
             $settings['connection'],

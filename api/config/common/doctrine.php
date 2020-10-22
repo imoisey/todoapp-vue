@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Auth;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
@@ -33,6 +35,12 @@ return [
             false
         );
 
+        foreach ($settings['types'] as $name => $class) {
+            if (!Type::hasType($name)) {
+                Type::addType($name, $class);
+            }
+        }
+
         $config->setNamingStrategy(new UnderscoreNamingStrategy());
 
         return EntityManager::create(
@@ -53,6 +61,12 @@ return [
             ],
             'metadata_dirs' => [
                 __DIR__ . '/../../src/Auth/Entity'
+            ],
+            'types' => [
+                Auth\Entity\User\IdType::NAME => Auth\Entity\User\IdType::class,
+                Auth\Entity\User\EmailType::NAME => Auth\Entity\User\EmailType::class,
+                Auth\Entity\User\RoleType::NAME => Auth\Entity\User\RoleType::class,
+                Auth\Entity\User\StatusType::NAME => Auth\Entity\User\StatusType::class,
             ]
         ],
     ],

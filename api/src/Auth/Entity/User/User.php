@@ -11,6 +11,7 @@ use DomainException;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="auth_users")
  */
 class User
@@ -227,5 +228,23 @@ class User
     public function getNewEmailToken(): ?Token
     {
         return $this->newEmailToken;
+    }
+
+    /**
+     * @ORM\PostLoad()
+     */
+    public function checkEmbers(): void
+    {
+        if ($this->joinConfirmToken && $this->joinConfirmToken->isEmpty()) {
+            $this->joinConfirmToken = null;
+        }
+
+        if ($this->passwordResetToken && $this->passwordResetToken->isEmpty()) {
+            $this->passwordResetToken = null;
+        }
+
+        if ($this->newEmailToken && $this->newEmailToken->isEmpty()) {
+            $this->newEmailToken = null;
+        }
     }
 }

@@ -30,6 +30,9 @@ return [
         return DependencyFactory::fromConnection($configuration, new ExistingConnection($connection));
     },
 
+    'Doctrine\Migrations\Tools\Console\Command\*Command' => DI\autowire()
+        ->constructorParameter('dependencyFactory', DI\get(DependencyFactory::class)),
+
     'config' => [
         'console' => [
             'commands' => [

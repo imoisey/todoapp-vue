@@ -76,7 +76,7 @@ frontend-shell:
 frontend-chown:
 	@docker-compose $(DOCKER_ARGS) run --rm $(FRONTEND_NODE_CLI) chown -R 1000:1000 ./
 
-api-init: api-composer-install api-wait-db api-migrations
+api-init: api-composer-install api-wait-db api-migrations api-fixtures
 
 api-composer-install:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer install
@@ -99,6 +99,9 @@ api-wait-db:
 
 api-migrations:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) php bin/console migrations:migrate --no-interaction
+
+api-fixtures:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) php bin/console fixtures:load --no-interaction
 
 api-validate-schema:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) php bin/console orm:validate-schema --no-interaction

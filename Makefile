@@ -76,7 +76,7 @@ frontend-shell:
 frontend-chown:
 	@docker-compose $(DOCKER_ARGS) run --rm $(FRONTEND_NODE_CLI) chown -R 1000:1000 ./
 
-api-init: api-composer-install
+api-init: api-composer-install api-wait-db api-migrations
 
 api-composer-install:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer install

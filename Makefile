@@ -94,6 +94,9 @@ api-cs-fix:
 api-analyze:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer psalm
 
+api-wait-db:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) wait-for-it api-postgres:5432 -t 30
+
 api-migrations:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) php bin/console migrations:migrate --no-interaction
 

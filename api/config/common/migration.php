@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Doctrine\Migrations\Configuration\Connection\ExistingConnection;
+use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 use Doctrine\Migrations\Configuration\Migration\ConfigurationArray;
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\Tools\Console\Command;
@@ -25,9 +25,8 @@ return [
 
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $container->get(EntityManagerInterface::class);
-        $connection = $entityManager->getConnection();
 
-        return DependencyFactory::fromConnection($configuration, new ExistingConnection($connection));
+        return DependencyFactory::fromEntityManager($configuration, new ExistingEntityManager($entityManager));
     },
 
     'Doctrine\Migrations\Tools\Console\Command\*Command' => DI\autowire()

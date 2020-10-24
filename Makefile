@@ -11,8 +11,9 @@ restart: docker-down docker-up
 build: docker-build
 lint: api-lint
 analyze: api-analyze
+validate-schema: api-validate-schema
 test: api-test
-check: lint analyze test
+check: lint analyze validate-schema test
 
 init-git-hooks:
 	@find .git/hooks -type l -exec rm {} \;
@@ -95,6 +96,9 @@ api-analyze:
 
 api-migrations:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) php bin/console migrations:migrate --no-interaction
+
+api-validate-schema:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) php bin/console orm:validate-schema --no-interaction
 
 api-test: api-test-unit api-test-functional
 

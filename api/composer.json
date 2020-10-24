@@ -15,6 +15,7 @@
     "require": {
         "php": "^7.4",
         "ext-json": "^7.4",
+        "doctrine/data-fixtures": "^1.4",
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.7",
         "laminas/laminas-config-aggregator": "^1.3",

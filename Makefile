@@ -93,6 +93,9 @@ api-cs-fix:
 api-analyze:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer psalm
 
+api-migrations:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) php bin/console migrations:migrate --no-interaction
+
 api-test: api-test-unit api-test-functional
 
 api-test-unit:

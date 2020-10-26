@@ -41,6 +41,7 @@ services:
       MAILER_PASSWORD: secret
       MAILER_ENCRYPTION: tcp
       MAILER_FROM_EMAIL: from@email.ru
+      FRONTEND_URL: ${FRONTEND_URL}
     volumes:
       - "./api:/app"
 
@@ -55,6 +56,7 @@ services:
       MAILER_PASSWORD: secret
       MAILER_ENCRYPTION: tcp
       MAILER_FROM_EMAIL: from@email.ru
+      FRONTEND_URL: ${FRONTEND_URL}
     volumes:
       - "./api:/app"
     tty: true

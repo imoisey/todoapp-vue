@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Finesse\SwiftMailerDefaultsPlugin\SwiftMailerDefaultsPlugin;
 use Psr\Container\ContainerInterface;
 
 return [
@@ -14,16 +15,23 @@ return [
          *     user:string,
          *     password:string,
          *     encryption:string,
+         *     from:array
          * } $config
          */
         $config = $container->get('config')['mailer'];
 
-        $transport = (new Swift_SmtpTransport($config['host'], $config['post']))
+        $transport = (new Swift_SmtpTransport($config['host'], $config['port']))
             ->setUsername($config['user'])
             ->setPassword($config['password'])
             ->setEncryption($config['encryption']);
 
-        return new Swift_Mailer($transport);
+        $mailer = new Swift_Mailer($transport);
+
+        $mailer->registerPlugin(new SwiftMailerDefaultsPlugin([
+            'from' => $config['from']
+        ]));
+
+        return $mailer;
     },
 
     'config' => [

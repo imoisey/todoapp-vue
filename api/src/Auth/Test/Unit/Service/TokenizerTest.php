@@ -9,6 +9,9 @@ use DateInterval;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers Tokenizer
+ */
 class TokenizerTest extends TestCase
 {
     public function testSuccess(): void

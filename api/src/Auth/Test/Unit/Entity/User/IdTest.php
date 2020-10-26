@@ -9,6 +9,9 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
+/**
+ * @covers Id
+ */
 class IdTest extends TestCase
 {
     public function testSuccess(): void

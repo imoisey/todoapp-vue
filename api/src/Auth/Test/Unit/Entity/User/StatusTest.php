@@ -8,6 +8,9 @@ use App\Auth\Entity\User\Status;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers Status
+ */
 class StatusTest extends TestCase
 {
     public function testSuccess(): void

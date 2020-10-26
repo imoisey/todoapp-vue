@@ -15,6 +15,9 @@ use Ramsey\Uuid\Uuid;
 use Swift_Mailer;
 use Swift_Message;
 
+/**
+ * @covers JoinConfirmSender
+ */
 class JoinConfirmSenderTest extends TestCase
 {
     public function testSuccess(): void

@@ -8,6 +8,9 @@ use App\Auth\Service\PasswordHasher;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers PasswordHasher
+ */
 class PasswordHasherTest extends TestCase
 {
     public function testHash(): void

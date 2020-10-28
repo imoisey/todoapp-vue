@@ -7,7 +7,6 @@ namespace App\Auth\Test\Unit\Service;
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Token;
 use App\Auth\Service\JoinConfirmSender;
-use App\Frontend\UrlGenerator;
 use DateTimeImmutable;
 use RuntimeException;
 use PHPUnit\Framework\TestCase;
@@ -27,16 +26,10 @@ class JoinConfirmSenderTest extends TestCase
         $token = new Token(Uuid::uuid4()->toString(), new DateTimeImmutable());
         $confirmUrl = 'http://test/join/confirm?token=' . $token->getValue();
 
-        $urlGenerator = $this->createMock(UrlGenerator::class);
-        $urlGenerator->expects(self::once())->method('generate')->with(
-            self::equalTo('join/confirm'),
-            self::equalTo(['token' => $token->getValue()]),
-        )->willReturn($confirmUrl);
-
         $twig = $this->createMock(Environment::class);
         $twig->expects(self::once())->method('render')->with(
             self::equalTo('auth/join/confirm.html.twig'),
-            self::equalTo(['url' => $confirmUrl]),
+            self::equalTo(['token' => $token]),
         )->willReturn($body = '<a href="' . $confirmUrl . '">' . $confirmUrl . '</a>');
 
         $mailer = $this->createMock(Swift_Mailer::class);
@@ -49,7 +42,7 @@ class JoinConfirmSenderTest extends TestCase
                 return 1;
             });
 
-        $sender = new JoinConfirmSender($mailer, $urlGenerator, $twig);
+        $sender = new JoinConfirmSender($mailer, $twig);
 
         $sender->send($to, $token);
     }
@@ -60,18 +53,13 @@ class JoinConfirmSenderTest extends TestCase
         $token = new Token(Uuid::uuid4()->toString(), new DateTimeImmutable());
         $confirmUrl = 'http://test/join/confirm?token=' . $token->getValue();
 
-        $urlGenerator = $this->createStub(UrlGenerator::class);
-        $urlGenerator
-            ->method('generate')
-            ->willReturn('http://test/join/confirm?token=' . $token->getValue());
-
         $twig = $this->createStub(Environment::class);
         $twig->method('render')->willReturn('<a href="' . $confirmUrl . '">' . $confirmUrl . '</a>');
 
         $mailer = $this->createStub(Swift_Mailer::class);
         $mailer->method('send')->willReturn(0);
 
-        $sender = new JoinConfirmSender($mailer, $urlGenerator, $twig);
+        $sender = new JoinConfirmSender($mailer, $twig);
 
         $this->expectException(RuntimeException::class);
         $sender->send($to, $token);

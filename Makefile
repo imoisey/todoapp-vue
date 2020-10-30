@@ -78,6 +78,9 @@ frontend-chown:
 
 api-init: api-composer-install api-wait-db api-migrations api-fixtures
 
+api-permissions:
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) chmod 777 var/cache var/log var/test
+
 api-composer-install:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer install
 	@$(MAKE) -s api-chown
@@ -125,7 +128,7 @@ api-shell:
 	@$(MAKE) -s api-chown
 
 api-clear:
-	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) sh -c 'rm -rf var/*/*'
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) sh -c 'rm -rf var/cache/* var/log/* var/test/*'
 
 api-chown:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) chown -R 1000:1000 ./

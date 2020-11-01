@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Log\LoggerInterface;
 use Slim\Interfaces\CallableResolverInterface;
 use Slim\Middleware\ErrorMiddleware;
 
 return [
-    ErrorMiddleware::class => static function (ContainerInterface $container) {
+    ErrorMiddleware::class => static function (ContainerInterface $container): ErrorMiddleware {
         /** @var CallableResolverInterface $callableResolver */
         $callableResolver = $container->get(CallableResolverInterface::class);
         /** @var ResponseFactoryInterface $responseFactory */
@@ -23,12 +24,16 @@ return [
          */
         $config = $container->get('config')['errors'];
 
+        /** @var LoggerInterface $logger */
+        $logger = $container->get(LoggerInterface::class);
+
         return new ErrorMiddleware(
             $callableResolver,
             $responseFactory,
             $config['display_details'],
             $config['log'],
             true,
+            $logger,
         );
     },
 

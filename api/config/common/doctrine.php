@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Auth;
+use App\DoctrineFlusher;
+use App\Flusher;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\Common\EventManager;
@@ -60,6 +62,13 @@ return [
             $config,
             $eventManager
         );
+    },
+
+    Flusher::class => static function (ContainerInterface $container): Flusher {
+        /** @var EntityManagerInterface $em */
+        $em = $container->get(EntityManagerInterface::class);
+
+        return new DoctrineFlusher($em);
     },
 
     'config' => [

@@ -15,7 +15,7 @@ use Ramsey\Uuid\Uuid;
 
 class RequestFixture extends AbstractFixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $user = User::joinByEmail(
             Id::generate(),

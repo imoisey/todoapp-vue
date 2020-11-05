@@ -17,6 +17,12 @@ class WebTestCase extends TestCase
 {
     private ?App $app = null;
 
+    protected function tearDown(): void
+    {
+        $this->app = null;
+        parent::tearDown();
+    }
+
     protected static function json(string $method, string $path, array $body = []): ServerRequestInterface
     {
         $request = self::request($method, $path)

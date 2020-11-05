@@ -27,6 +27,8 @@ class RequestTest extends WebTestCase
 
     public function testSuccess(): void
     {
+        $this->mailer()->clear();
+
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'new-user@email.ru',
             'password' => 'new-password',
@@ -34,6 +36,8 @@ class RequestTest extends WebTestCase
 
         self::assertEquals(201, $response->getStatusCode(), (string)$response->getBody());
         self::assertEquals('', (string)$response->getBody());
+
+        self::assertTrue($this->mailer()->hasEmailSentTo('new-user@email.ru'));
     }
 
     public function testExisting(): void

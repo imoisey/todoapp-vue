@@ -22,7 +22,7 @@ class ConfirmAction implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        /** @psalm-var array{email:?string, password:?string} $data */
+        /** @psalm-var array{token:?string} $data */
         $data = $request->getParsedBody();
 
         $command = new Command();

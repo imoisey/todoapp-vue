@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 return [
     ValidatorInterface::class => static function (): ValidatorInterface {
-        /** psalm-suppress DeprecatedMethod  */
+        /** @psalm-suppress DeprecatedMethod  */
         AnnotationRegistry::registerLoader('class_exists');
 
         return Validation::createValidatorBuilder()

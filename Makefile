@@ -83,7 +83,7 @@ frontend-chown:
 api-init: api-composer-install api-wait-db api-migrations api-fixtures
 
 api-permissions:
-	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) chmod 777 var/cache var/log var/test
+	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) chmod 777 -R var/cache var/log var/test
 
 api-composer-install:
 	@docker-compose $(DOCKER_ARGS) run --rm $(API_PHP_CLI) composer install

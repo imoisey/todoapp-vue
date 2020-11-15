@@ -24,6 +24,7 @@
         "slim/psr7": "^1.2",
         "slim/slim": "^4.5",
         "swiftmailer/swiftmailer": "^6.2",
+        "symfony/config": "^5.1",
         "symfony/console": "^5.1",
         "symfony/translation": "^5.1",
         "symfony/validator": "^5.1",

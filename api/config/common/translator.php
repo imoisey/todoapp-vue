@@ -34,7 +34,10 @@ return [
         /** @var Translator $translator */
         $translator = $container->get(Translator::class);
 
-        /** @var array{allowed:string[]} $config */
+        /**
+         * @psalm-suppress MixedArrayAccess
+         * @psalm-var array{allowed:array<string[]>} $config
+         */
         $config = $container->get('config')['locales'];
 
         return new TranslatorLocale($translator, $config['allowed']);

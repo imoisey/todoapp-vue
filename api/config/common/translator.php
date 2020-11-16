@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Middleware\TranslatorLocale;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Translation\Loader\PhpFileLoader;
 use Symfony\Component\Translation\Loader\XliffFileLoader;
@@ -9,7 +10,9 @@ use Symfony\Component\Translation\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 return [
-    TranslatorInterface::class => static function (ContainerInterface $container): TranslatorInterface {
+    TranslatorInterface::class => DI\get(Translator::class),
+
+    Translator::class => static function (ContainerInterface $container): TranslatorInterface {
         /**
          * @psalm-suppress MixedArrayAccess
          * @psalm-var array{lang:string,resources:array<string[]>} $config
@@ -27,6 +30,16 @@ return [
         return $translator;
     },
 
+    TranslatorLocale::class => static function (ContainerInterface $container): TranslatorLocale {
+        /** @var Translator $translator */
+        $translator = $container->get(Translator::class);
+
+        /** @var array{allowed:string[]} $config */
+        $config = $container->get('config')['locales'];
+
+        return new TranslatorLocale($translator, $config['allowed']);
+    },
+
     'config' => [
         'translator' => [
             'lang' => 'en',
@@ -38,6 +51,9 @@ return [
                     'validators'
                 ],
             ],
+        ],
+        'locales' => [
+            'allowed' => ['en', 'ru'],
         ],
     ],
 ];

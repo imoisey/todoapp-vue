@@ -57,10 +57,8 @@ class RequestTest extends WebTestCase
 
     public function testExistingLang(): void
     {
-        self::markTestIncomplete('Waiting for translation.');
-
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
-            'email' => 'existing@app.test',
+            'email' => 'existing@email.ru',
             'password' => 'new-password',
         ])->withHeader('Accept-Language', 'ru'));
 

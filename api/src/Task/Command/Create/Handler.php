@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Task\Command\CreateTask;
+namespace App\Task\Command\Create;
 
 class Handler
 {

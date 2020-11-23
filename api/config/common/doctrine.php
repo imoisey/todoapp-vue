@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Auth;
+use App\Task;
 use App\DoctrineFlusher;
 use App\Flusher;
 use Doctrine\Common\Cache\ArrayCache;
@@ -83,13 +84,19 @@ return [
             ],
             'subscribers' => [],
             'metadata_dirs' => [
-                __DIR__ . '/../../src/Auth/Entity'
+                __DIR__ . '/../../src/Auth/Entity',
+                __DIR__ . '/../../src/Task/Entity',
             ],
             'types' => [
                 Auth\Entity\User\IdType::NAME => Auth\Entity\User\IdType::class,
                 Auth\Entity\User\EmailType::NAME => Auth\Entity\User\EmailType::class,
                 Auth\Entity\User\RoleType::NAME => Auth\Entity\User\RoleType::class,
                 Auth\Entity\User\StatusType::NAME => Auth\Entity\User\StatusType::class,
+
+                Task\Entity\Task\IdType::NAME => Task\Entity\Task\IdType::class,
+                Task\Entity\Task\StatusType::NAME => Task\Entity\Task\StatusType::class,
+                Task\Entity\Task\Author\IdType::NAME => Task\Entity\Task\Author\IdType::class,
+                Task\Entity\Task\Author\EmailType::NAME => Task\Entity\Task\Author\EmailType::class,
             ]
         ],
     ],

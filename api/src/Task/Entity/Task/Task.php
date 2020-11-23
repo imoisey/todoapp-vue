@@ -6,22 +6,43 @@ namespace App\Task\Entity\Task;
 
 use App\Task\Entity\Task\Author\Author;
 use DateTimeImmutable;
+use Doctrine\ORM\Mapping as ORM;
 use DomainException;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="task_tasks")
+ */
 class Task
 {
+    /**
+     * @ORM\Column(type="task_task_id")
+     * @ORM\Id
+     */
     private Id $id;
-
+    /**
+     * @ORM\Embedded(class="App\Task\Entity\Task\Author\Author")
+     */
     private Author $author;
-
+    /**
+     * @ORM\Column(type="string", nullable=false, length=255)
+     */
     private string $name;
-
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
     private string $description;
-
+    /**
+     * @ORM\Column(type="task_task_status", length=16)
+     */
     private Status $status;
-
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
     private DateTimeImmutable $createdDate;
-
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
     private ?DateTimeImmutable $completedDate = null;
 
     public function __construct(

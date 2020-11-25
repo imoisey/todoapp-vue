@@ -61,6 +61,22 @@ class Task
         $this->createdDate = $createdDate;
     }
 
+    public static function create(
+        Id $id,
+        Author $author,
+        string $name,
+        string $description
+    ): self {
+        return new self(
+            $id,
+            $author,
+            $name,
+            $description,
+            Status::wait(),
+            new DateTimeImmutable()
+        );
+    }
+
     public function execute(): void
     {
         if (!$this->isWait()) {

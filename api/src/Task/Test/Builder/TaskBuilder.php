@@ -21,6 +21,10 @@ class TaskBuilder
     private Status $status;
     private DateTimeImmutable $createdDate;
 
+    private bool $doExecute = false;
+    private bool $doComplete = false;
+    private bool $doDelete = false;
+
     public function __construct()
     {
         $this->id = Id::generate();
@@ -48,9 +52,33 @@ class TaskBuilder
         return $clone;
     }
 
+    public function doExecute(): self
+    {
+        $clone = clone $this;
+        $clone->doExecute = true;
+        return $clone;
+    }
+
+    public function doComplete(): self
+    {
+        $clone = clone $this;
+        $clone->doExecute = true;
+        $clone->doComplete = true;
+        return $clone;
+    }
+
+    public function doDelete(): self
+    {
+        $clone = clone $this;
+        $clone->doExecute = true;
+        $clone->doComplete = true;
+        $clone->doDelete = true;
+        return $clone;
+    }
+
     public function build(): Task
     {
-        return new Task(
+        $task = new Task(
             $this->id,
             $this->author,
             $this->name,
@@ -58,5 +86,19 @@ class TaskBuilder
             $this->status,
             $this->createdDate
         );
+
+        if ($this->doExecute) {
+            $task->execute();
+        }
+
+        if ($this->doComplete) {
+            $task->complete();
+        }
+
+        if ($this->doDelete) {
+            $task->delete();
+        }
+
+        return $task;
     }
 }

@@ -70,8 +70,6 @@ class TaskBuilder
     public function doDelete(): self
     {
         $clone = clone $this;
-        $clone->doExecute = true;
-        $clone->doComplete = true;
         $clone->doDelete = true;
         return $clone;
     }

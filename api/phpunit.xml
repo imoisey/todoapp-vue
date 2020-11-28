@@ -16,6 +16,7 @@
             <directory suffix="Test.php">src/Task/Test/Unit</directory>
             <directory suffix="Test.php">src/Frontend/Test/Unit</directory>
             <directory suffix="Test.php">src/Http/Test/Unit</directory>
+            <directory suffix="Test.php">src/Helper/Test/Unit</directory>
         </testsuite>
         <testsuite name="functional">
             <directory suffix="Test.php">tests/Functional</directory>
@@ -30,6 +31,7 @@
                 <directory>src/Task/Test</directory>
                 <directory>src/Frontend/Test</directory>
                 <directory>src/Http/Test</directory>
+                <directory>src/Helper/Test</directory>
             </exclude>
         </whitelist>
     </filter>

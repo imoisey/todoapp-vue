@@ -22,6 +22,7 @@ abstract class DataTransferObject
                 continue;
             }
 
+            /** @var string */
             $data[$reflectionProperty->getName()] = $reflectionProperty->getValue($this);
         }
 

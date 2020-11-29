@@ -26,6 +26,7 @@
                 <directory name="src/Task/Test"/>
                 <directory name="src/Frontend/Test"/>
                 <directory name="src/Http/Test"/>
+                <directory name="src/Helper/Test"/>
                 <directory name="tests"/>
             </errorLevel>
         </PropertyNotSetInConstructor>

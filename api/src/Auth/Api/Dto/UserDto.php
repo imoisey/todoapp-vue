@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Contract\Dto;
+namespace App\Auth\Api\Dto;
 
 use App\Helper\DataTransferObject;
 

@@ -6,6 +6,7 @@ namespace App\Task\AntiCorruption;
 
 use App\Auth\Api\ApiInterface;
 use App\Task\AntiCorruption\Dto\UserDto;
+use DomainException;
 
 class AuthService
 {
@@ -16,6 +17,11 @@ class AuthService
         $this->auth = $auth;
     }
 
+    /**
+     * @param string $id
+     * @return UserDto
+     * @throws DomainException
+     */
     public function getUserById(string $id): UserDto
     {
         $user = $this->auth->getUserById($id);

@@ -230,6 +230,11 @@ class User
         return $this->newEmailToken;
     }
 
+    public function getStatus(): Status
+    {
+        return $this->status;
+    }
+
     /**
      * @ORM\PostLoad()
      */

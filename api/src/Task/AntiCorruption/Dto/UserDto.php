@@ -10,7 +10,7 @@ use DateTimeImmutable;
 class UserDto extends DataTransferObject
 {
     public string $id = '';
-    public DateTimeImmutable $date;
+    public ?DateTimeImmutable $date = null;
     public string $email = '';
     public string $status = '';
     public string $role = '';

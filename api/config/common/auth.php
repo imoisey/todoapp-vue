@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Auth\Api\Api;
+use App\Auth\Api\ApiInterface;
 use App\Auth\Entity\User\DoctrineUserRepository;
 use App\Auth\Entity\User\User;
 use App\Auth\Entity\User\UserRepository;
@@ -11,6 +13,12 @@ use Doctrine\ORM\EntityRepository;
 use Psr\Container\ContainerInterface;
 
 return [
+    ApiInterface::class => static function (ContainerInterface $container): ApiInterface {
+        /** @var UserRepository $users */
+        $users = $container->get(UserRepository::class);
+        return new Api($users);
+    },
+
     UserRepository::class => static function (ContainerInterface $container): UserRepository {
         /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);

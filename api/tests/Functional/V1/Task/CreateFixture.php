@@ -17,7 +17,7 @@ class CreateFixture extends AbstractFixture
 {
     public const USER_UUID = 'cc2444cb-87ad-4a92-89fd-fa9d2392caa3';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         // Valid
         $user = User::joinByEmail(

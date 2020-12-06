@@ -11,7 +11,7 @@ interface TaskRepository
     /**
      * @param Id $id
      * @return Task
-     * @throws DomainException;
+     * @throws DomainException
      */
     public function get(Id $id): Task;
 

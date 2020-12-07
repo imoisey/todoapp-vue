@@ -14,5 +14,9 @@ return static function (App $app): void {
             $group->post('/join', Action\V1\Auth\Join\RequestAction::class);
             $group->post('/join/confirm', Action\V1\Auth\Join\ConfirmAction::class);
         });
+
+        $group->group('/task', function (RouteCollectorProxy $group): void {
+            $group->post('/create', Action\V1\Task\CreateAction::class);
+        });
     });
 };

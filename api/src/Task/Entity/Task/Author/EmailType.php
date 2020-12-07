@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Task\Entity\Task\Author;
 
-use App\Auth\Entity\User\Email;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 

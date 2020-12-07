@@ -19,14 +19,15 @@ class CreateFixture extends AbstractFixture
 
     public function load(ObjectManager $manager): void
     {
-        // Valid
         $user = User::joinByEmail(
             new Id(self::USER_UUID),
             $date = new DateTimeImmutable(),
             new Email('valid@email.ru'),
             'password-hash',
-            new Token(Uuid::uuid4()->toString(), $date->modify('+1 hour'))
+            new Token($token = Uuid::uuid4()->toString(), $date->modify('+1 hour'))
         );
+
+        $user->confirmJoin($token, new DateTimeImmutable());
 
         $manager->persist($user);
 

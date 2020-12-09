@@ -8,6 +8,7 @@ use App\Task\Entity\Task\Author\Author;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use DomainException;
+use Webmozart\Assert\Assert;
 
 /**
  * @ORM\Entity
@@ -75,6 +76,14 @@ class Task
             Status::wait(),
             new DateTimeImmutable()
         );
+    }
+
+    public function edit(string $name, string $description): void
+    {
+        Assert::notEmpty($name, 'The name cannot be empty.');
+
+        $this->name = $name;
+        $this->description = $description;
     }
 
     public function execute(): void

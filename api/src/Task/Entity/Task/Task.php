@@ -78,7 +78,7 @@ class Task
         );
     }
 
-    public function edit(string $name, string $description): void
+    public function modify(string $name, string $description): void
     {
         Assert::notEmpty($name, 'The name cannot be empty.');
 

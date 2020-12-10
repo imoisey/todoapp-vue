@@ -7,14 +7,14 @@ namespace App\Task\Test\Unit\Entity\Task\Task;
 use App\Task\Test\Builder\TaskBuilder;
 use PHPUnit\Framework\TestCase;
 
-class EditTest extends TestCase
+class ModifyTest extends TestCase
 {
     public function testSuccess(): void
     {
         $task = (new TaskBuilder())
             ->build();
 
-        $task->edit(
+        $task->modify(
             $name = 'Edit name',
             $description = 'Edit description'
         );
@@ -30,7 +30,7 @@ class EditTest extends TestCase
 
         $this->expectExceptionMessage('The name cannot be empty.');
 
-        $task->edit(
+        $task->modify(
             $name = '',
             $description = 'Edit description'
         );

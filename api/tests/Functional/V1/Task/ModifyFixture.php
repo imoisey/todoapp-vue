@@ -20,7 +20,7 @@ use Ramsey\Uuid\Uuid;
 
 class ModifyFixture extends AbstractFixture
 {
-    public const TASK_UUID = '00000000-0000-0000-0000-000000000001';
+    public const TASK_UUID = 'ecbe2bb8-4d0d-4e4e-afdd-9652f30a8616';
 
     public function load(ObjectManager $manager): void
     {

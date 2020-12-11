@@ -20,31 +20,27 @@ class ModifyTest extends WebTestCase
 
     public function testMethod(): void
     {
-        self::markTestSkipped('Not release action.');
-
-        $response = $this->app()->handle(self::json('GET', '/v1/task/edit'));
+        $response = $this->app()->handle(self::json('GET', '/v1/task/modify'));
 
         self::assertEquals(405, $response->getStatusCode());
     }
 
     public function testSuccess(): void
     {
-        self::markTestSkipped('Not release action.');
+        self::markTestSkipped("Not release action.");
 
-        $response = $this->app()->handle(self::json('PUT', '/v1/task/edit', [
+        $response = $this->app()->handle(self::json('POST', '/v1/task/modify', [
             'id' => ModifyFixture::TASK_UUID,
             'name' => 'Modify Name Task',
             'description' => 'Modify Description Task',
         ]));
 
-        self::assertEquals(201, $response);
+        self::assertEquals(201, $response->getStatusCode());
     }
 
     public function testNotTaskId(): void
     {
-        self::markTestSkipped('Not release action.');
-
-        $response = $this->app()->handle(self::json('PUT', '/v1/task/edit', [
+        $response = $this->app()->handle(self::json('POST', '/v1/task/modify', [
             'id' => '',
             'name' => 'Modify Name Task',
             'description' => 'Modify Description Task',

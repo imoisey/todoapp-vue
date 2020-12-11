@@ -17,6 +17,7 @@ return static function (App $app): void {
 
         $group->group('/task', function (RouteCollectorProxy $group): void {
             $group->post('/create', Action\V1\Task\CreateAction::class);
+            $group->post('/modify', Action\V1\Task\ModifyAction::class);
         });
     });
 };

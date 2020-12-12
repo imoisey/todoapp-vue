@@ -22,7 +22,7 @@ class DoctrineTaskRepository implements TaskRepository
     public function get(Id $id): Task
     {
         if (!$task = $this->repository->find($id->getValue())) {
-            throw new DomainException('Task is not found.');
+            throw new DomainException('Task not found.');
         }
 
         /** @var Task $task */

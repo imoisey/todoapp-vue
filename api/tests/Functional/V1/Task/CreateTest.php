@@ -28,7 +28,7 @@ class CreateTest extends WebTestCase
     public function testSuccess(): void
     {
         $response = $this->app()->handle(self::json('POST', '/v1/task/create', [
-            'author' => CreateFixture::USER_UUID,
+            'author' => CreateFixture::USER_ID,
             'name' => 'New Task',
             'description' => 'Description Task',
         ]));

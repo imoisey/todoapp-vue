@@ -20,14 +20,14 @@ use Ramsey\Uuid\Uuid;
 
 class ModifyFixture extends AbstractFixture
 {
-    public const TASK_UUID = 'ecbe2bb8-4d0d-4e4e-afdd-9652f30a8616';
+    public const TASK_ID = '00000000-0000-1000-8000-000000000001';
 
     public function load(ObjectManager $manager): void
     {
         $user = User::joinByEmail(
-            new Id(CreateFixture::USER_UUID),
+            new Id(CreateFixture::USER_ID),
             $date = new DateTimeImmutable(),
-            new Email('valid@email.ru'),
+            new Email('user@email.ru'),
             'password-hash',
             new Token($token = Uuid::uuid4()->toString(), $date->modify('+1 hour'))
         );
@@ -37,8 +37,8 @@ class ModifyFixture extends AbstractFixture
         $manager->persist($user);
 
         $task = Task::create(
-            $id = new TaskId(self::TASK_UUID),
-            new Author(new AuthorId(CreateFixture::USER_UUID), new AuthorEmail('author@email.ru')),
+            $id = new TaskId(self::TASK_ID),
+            new Author(new AuthorId(CreateFixture::USER_ID), new AuthorEmail('author@email.ru')),
             $name = 'New Task',
             $description = 'Description Task'
         );

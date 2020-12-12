@@ -15,12 +15,12 @@ use Ramsey\Uuid\Uuid;
 
 class CreateFixture extends AbstractFixture
 {
-    public const USER_UUID = 'cc2444cb-87ad-4a92-89fd-fa9d2392caa3';
+    public const USER_ID = '00000000-0000-1000-8000-000000000001';
 
     public function load(ObjectManager $manager): void
     {
         $user = User::joinByEmail(
-            new Id(self::USER_UUID),
+            new Id(self::USER_ID),
             $date = new DateTimeImmutable(),
             new Email('valid@email.ru'),
             'password-hash',

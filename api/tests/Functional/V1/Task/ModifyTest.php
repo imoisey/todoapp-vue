@@ -30,7 +30,7 @@ class ModifyTest extends WebTestCase
         self::markTestSkipped("Not release action.");
 
         $response = $this->app()->handle(self::json('POST', '/v1/task/modify', [
-            'id' => ModifyFixture::TASK_UUID,
+            'id' => ModifyFixture::TASK_ID,
             'name' => 'Modify Name Task',
             'description' => 'Modify Description Task',
         ]));

@@ -19,6 +19,7 @@ return static function (App $app): void {
             $group->post('/create', Action\V1\Task\CreateAction::class);
             $group->post('/modify', Action\V1\Task\ModifyAction::class);
             $group->post('/delete', Action\V1\Task\DeleteAction::class);
+            $group->post('/execute', Action\V1\Task\ExecuteAction::class);
         });
     });
 };

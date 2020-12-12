@@ -13,7 +13,6 @@ class Author
 {
     /**
      * @ORM\Column(type="task_author_id")
-     * @ORM\Id
      */
     private Id $id;
     /**

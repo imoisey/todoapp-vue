@@ -23,7 +23,7 @@ class CompleteFixture extends AbstractFixture
     public const USER_ID = '00000000-0000-1000-9000-000000000001';
     public const TASK_ID = '00000000-0000-1000-8000-000000000001';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $user = User::joinByEmail(
             new Id(self::USER_ID),

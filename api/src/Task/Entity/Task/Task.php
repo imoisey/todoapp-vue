@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Task\Entity\Task;
 
+use App\Event\AggregateRoot;
+use App\Event\EventTrait;
 use App\Task\Entity\Task\Author\Author;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,8 +16,10 @@ use Webmozart\Assert\Assert;
  * @ORM\Entity
  * @ORM\Table(name="task_tasks")
  */
-class Task
+class Task implements AggregateRoot
 {
+    use EventTrait;
+
     /**
      * @ORM\Column(type="task_task_id")
      * @ORM\Id

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Auth\Entity\User;
 
 use App\Auth\Service\PasswordHasher;
+use App\Event\AggregateRoot;
+use App\Event\EventTrait;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use DomainException;
@@ -14,8 +16,10 @@ use DomainException;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="auth_users")
  */
-class User
+class User implements AggregateRoot
 {
+    use EventTrait;
+
     /**
      * @ORM\Column(type="auth_user_id")
      * @ORM\Id

@@ -7,6 +7,7 @@ namespace App\Task\Entity\Task;
 use App\Event\AggregateRoot;
 use App\Event\EventTrait;
 use App\Task\Entity\Task\Author\Author;
+use App\Task\Entity\Task\Event\TaskWasCreated;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use DomainException;
@@ -64,6 +65,8 @@ class Task implements AggregateRoot
         $this->description = $description;
         $this->status = $status;
         $this->createdDate = $createdDate;
+
+        $this->recordEvent(new TaskWasCreated($this->id));
     }
 
     public static function create(
